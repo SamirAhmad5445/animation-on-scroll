@@ -1,0 +1,120 @@
+:root {
+  --accent: #fcd338;
+  --background: #a8c0f0;
+  --text: #050218;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  height: 100%;
+  font-size: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+.text-accent {
+  color: var(--accent);
+}
+.container {
+  position: relative;
+  min-height: 650vh;
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 32ch;
+  display: grid;
+  text-align: center;
+  font-size: 2.25em;
+  scale: calc(var(--scrollValue, 0) * 0.5 + 0.5);
+  opacity: var(--scrollValue, 0);
+  z-index: -1;
+}
+
+.card {
+  --translate: 4px;
+  --size: 11.5rem;
+  width: var(--size);
+  height: var(--size);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  transform: translate(
+    calc(var(--scrollValue, 0) * var(--x) * var(--base-x, 1vmax)),
+    calc(var(--scrollValue, 0) * var(--y) * var(--base-y, 1vmax))
+  );
+  z-index: calc(10 - var(--z, 0));
+}
+
+.card:nth-child(n + 5):nth-child(-n + 10) {
+  --translate: 2px;
+  --size: 8rem;
+}
+
+.card img {
+  border-radius: 2rem;
+  position: absolute;
+  inset: 50%;
+  transform: translate(
+    calc(var(--mouseX) * var(--translate) + -50%),
+    calc(var(--mouseY) * var(--translate) + -50%)
+  );
+}
+
+@media (max-width: 720px) {
+  .content p {
+    width: 18ch;
+    margin-inline: auto;
+  }
+
+  .card {
+    --base-x: 5px;
+    --base-y: 24px;
+  }
+  .card:nth-child(5) {
+    --base-x: -35px;
+    --base-y: 12px;
+  }
+  .card:nth-child(6) {
+    --base-x: -12px;
+    --base-y: 5px;
+  }
+  .card:nth-child(7) {
+    --base-x: -1px;
+    --base-y: 20px;
+  }
+  .card:nth-child(8) {
+    --base-x: -5px;
+    --base-y: 15px;
+  }
+  .card:nth-child(n + 9):nth-child(-n + 10) {
+    display: none;
+  }
+  .card img {
+    position: static;
+    transform: none;
+  }
+}
